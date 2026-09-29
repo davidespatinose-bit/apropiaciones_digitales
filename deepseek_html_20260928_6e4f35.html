@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ciudadanía Digital y Apropiaciones Digitales — David E. Patiño S.</title>
+<meta name="description" content="Micrositio académico sobre apropiaciones digitales: información digital, economía digital, derechos y seguridad en línea. Actividad No. 2 — Ciudadanía Digital." />
+<style>
+  /* ============ RESET Y VARIABLES ============ */
+  :root{
+    --azul:#1B3A6B;
+    --azul-claro:#2C5AA0;
+    --acento:#F2A93B;
+    --gris-bg:#F5F7FA;
+    --gris-borde:#E1E6EE;
+    --texto:#1F2937;
+    --texto-suave:#4B5563;
+    --blanco:#FFFFFF;
+    --verde:#2E7D32;
+    --rojo:#C62828;
+    --amarillo:#F9A825;
+    --sombra:0 4px 16px rgba(27,58,107,.08);
+    --radio:12px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    color:var(--texto);
+    background:var(--blanco);
+    line-height:1.65;
+    font-size:16px;
+  }
+  h1,h2,h3,h4{color:var(--azul);line-height:1.25;font-weight:700;}
+  h1{font-size:clamp(1.6rem,4vw,2.4rem);}
+  h2{font-size:clamp(1.4rem,3vw,1.9rem);margin-bottom:.6em;}
+  h3{font-size:clamp(1.1rem,2.2vw,1.35rem);margin-top:1.2em;margin-bottom:.4em;}
+  h4{font-size:1.05rem;margin-top:1em;}
+  p{margin-bottom:1em;color:var(--texto-suave);}
+  a{color:var(--azul-claro);text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  ul,ol{margin:0 0 1em 1.4em;color:var(--texto-suave);}
+  li{margin-bottom:.4em;}
+
+  /* ============ NAVEGACIÓN ============ */
+  nav{
+    position:sticky;top:0;z-index:100;
+    background:rgba(255,255,255,.96);
+    backdrop-filter:saturate(180%) blur(8px);
+    border-bottom:1px solid var(--gris-borde);
+    box-shadow:0 1px 8px rgba(0,0,0,.04);
+  }
+  .nav-inner{
+    max-width:1150px;margin:0 auto;
+    padding:.85rem 1.2rem;
+    display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+  }
+  .brand{font-weight:800;color:var(--azul);font-size:1.05rem;letter-spacing:.2px;}
+  .nav-links{display:flex;gap:.3rem;list-style:none;flex-wrap:wrap;margin:0;}
+  .nav-links a{
+    padding:.5rem .85rem;border-radius:8px;
+    color:var(--texto);font-weight:500;font-size:.94rem;
+    transition:background .2s, color .2s;
+  }
+  .nav-links a:hover{background:var(--gris-bg);color:var(--azul);text-decoration:none;}
+  .nav-toggle{display:none;background:none;border:0;font-size:1.6rem;color:var(--azul);cursor:pointer;}
+  @media(max-width:820px){
+    .nav-toggle{display:block;}
+    .nav-links{
+      display:none;flex-direction:column;width:100%;
+      border-top:1px solid var(--gris-borde);padding-top:.5rem;
+    }
+    .nav-links.open{display:flex;}
+    .nav-links a{padding:.6rem .5rem;}
+  }
+
+  /* ============ HERO / INICIO ============ */
+  header.hero{
+    background:linear-gradient(135deg,var(--azul) 0%,var(--azul-claro) 100%);
+    color:var(--blanco);
+    padding:4.5rem 1.2rem 4rem;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+  }
+  header.hero::before{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(circle at 15% 20%,rgba(242,169,59,.22),transparent 45%),
+               radial-gradient(circle at 85% 80%,rgba(255,255,255,.10),transparent 50%);
+    pointer-events:none;
+  }
+  .hero-inner{position:relative;max-width:900px;margin:0 auto;}
+  header.hero h1{color:var(--blanco);margin-bottom:.6rem;}
+  header.hero .sub{color:rgba(255,255,255,.9);font-size:1.1rem;margin-bottom:1.6rem;}
+  .hero-badges{display:flex;gap:.6rem;flex-wrap:wrap;justify-content:center;margin-bottom:2rem;}
+  .badge{
+    background:rgba(255,255,255,.15);
+    border:1px solid rgba(255,255,255,.28);
+    color:var(--blanco);
+    padding:.35rem .85rem;border-radius:999px;
+    font-size:.82rem;font-weight:500;
+  }
+  .btn{
+    display:inline-block;
+    padding:.85rem 1.6rem;
+    border-radius:10px;
+    background:var(--acento);
+    color:var(--azul);
+    font-weight:700;
+    border:0;cursor:pointer;
+    transition:transform .15s ease, box-shadow .2s ease;
+    text-decoration:none;
+  }
+  .btn:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.18);text-decoration:none;}
+  .btn-ghost{background:transparent;color:var(--blanco);border:1.5px solid rgba(255,255,255,.5);}
+  .btn-ghost:hover{background:rgba(255,255,255,.12);}
+  .hero-btns{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;}
+
+  /* ============ CONTENEDOR Y SECCIONES ============ */
+  main{max-width:1150px;margin:0 auto;padding:0 1.2rem;}
+  section{padding:3.5rem 0;border-bottom:1px solid var(--gris-borde);}
+  section:last-of-type{border-bottom:0;}
+  .section-kicker{
+    display:inline-block;
+    color:var(--azul-claro);
+    font-weight:700;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;
+    margin-bottom:.5rem;
+  }
+
+  /* ============ TARJETAS ============ */
+  .grid{display:grid;gap:1.2rem;}
+  .grid-3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr));}
+  .grid-2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr));}
+  .card{
+    background:var(--blanco);
+    border:1px solid var(--gris-borde);
+    border-radius:var(--radio);
+    padding:1.4rem;
+    box-shadow:var(--sombra);
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(27,58,107,.12);}
+  .card h3{margin-top:0;}
+  .card .icon{font-size:1.6rem;display:block;margin-bottom:.5rem;}
+  .card-destaque{
+    background:var(--gris-bg);
+    border-left:4px solid var(--acento);
+  }
+
+  /* ============ CAJA DE EJEMPLO ============ */
+  .ejemplo{
+    background:var(--gris-bg);
+    border-left:4px solid var(--azul-claro);
+    padding:1rem 1.1rem;
+    border-radius:8px;
+    margin:.9rem 0;
+    font-size:.95rem;
+  }
+  .ejemplo strong{color:var(--azul);}
+
+  /* ============ CADENA DE CONCEPTOS ============ */
+  .cadena{
+    display:flex;align-items:center;justify-content:center;
+    flex-wrap:wrap;gap:.6rem;
+    margin:1.4rem 0 1.6rem;
+    padding:1.2rem;
+    background:var(--gris-bg);
+    border-radius:var(--radio);
+  }
+  .cadena .nodo{
+    background:var(--azul);color:var(--blanco);
+    padding:.6rem 1rem;border-radius:999px;
+    font-weight:600;font-size:.88rem;
+    white-space:nowrap;
+  }
+  .cadena .flecha{color:var(--azul-claro);font-size:1.3rem;font-weight:700;}
+
+  /* ============ TABLAS ============ */
+  .tabla-wrap{overflow-x:auto;margin:1.2rem 0;border-radius:var(--radio);box-shadow:var(--sombra);}
+  table{
+    width:100%;border-collapse:collapse;background:var(--blanco);
+    font-size:.92rem;min-width:520px;
+  }
+  th,td{padding:.85rem 1rem;text-align:left;border-bottom:1px solid var(--gris-borde);}
+  th{background:var(--azul);color:var(--blanco);font-weight:600;font-size:.9rem;}
+  tr:nth-child(even) td{background:#FAFBFD;}
+  tr:last-child td{border-bottom:0;}
+
+  /* ============ ACORDEÓN ============ */
+  .acordeon{border:1px solid var(--gris-borde);border-radius:var(--radio);overflow:hidden;box-shadow:var(--sombra);}
+  .acordeon details{border-bottom:1px solid var(--gris-borde);}
+  .acordeon details:last-child{border-bottom:0;}
+  .acordeon summary{
+    cursor:pointer;padding:1rem 1.2rem;
+    font-weight:600;color:var(--azul);
+    background:var(--blanco);
+    list-style:none;display:flex;justify-content:space-between;align-items:center;
+    transition:background .2s;
+  }
+  .acordeon summary::-webkit-details-marker{display:none;}
+  .acordeon summary::after{content:"+";font-size:1.3rem;color:var(--azul-claro);font-weight:400;}
+  .acordeon details[open] summary::after{content:"−";}
+  .acordeon summary:hover{background:var(--gris-bg);}
+  .acordeon .contenido{padding:0 1.2rem 1rem;color:var(--texto-suave);font-size:.94rem;}
+
+  /* ============ SEMÁFORO ============ */
+  .semaforo{display:grid;gap:.7rem;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin:1.2rem 0;}
+  .luz{padding:.9rem 1rem;border-radius:10px;color:var(--blanco);font-weight:600;font-size:.9rem;}
+  .luz.verde{background:var(--verde);}
+  .luz.amarillo{background:var(--amarillo);color:#5a3d00;}
+  .luz.rojo{background:var(--rojo);}
+
+  /* ============ REFLEXIÓN ============ */
+  .reflexion{
+    background:linear-gradient(135deg,#F8FAFD,#EEF2F8);
+    border-radius:var(--radio);
+    padding:2rem 1.8rem;
+    border:1px solid var(--gris-borde);
+  }
+  .reflexion p:first-of-type::first-letter{
+    font-size:2.5rem;font-weight:800;color:var(--azul);
+    float:left;line-height:1;margin:.1em .3em 0 0;
+  }
+
+  /* ============ MICROSITIO / ENLACE ============ */
+  .enlace-destacado{
+    text-align:center;padding:1.6rem;
+    background:var(--azul);color:var(--blanco);
+    border-radius:var(--radio);
+    margin:1rem 0;
+  }
+  .enlace-destacado a{color:var(--acento);word-break:break-all;font-weight:700;}
+
+  /* ============ REFERENCIAS ============ */
+  .referencias{list-style:none;margin:0;padding:0;}
+  .referencias li{
+    padding:.8rem 0 .8rem 2rem;text-indent:-2rem;
+    border-bottom:1px dashed var(--gris-borde);
+    font-size:.92rem;color:var(--texto-suave);
+  }
+  .referencias li:last-child{border-bottom:0;}
+
+  /* ============ FOOTER ============ */
+  footer{
+    background:var(--azul);color:rgba(255,255,255,.85);
+    text-align:center;padding:2rem 1.2rem;font-size:.88rem;
+  }
+  footer strong{color:var(--blanco);}
+  footer a{color:var(--acento);}
+
+  /* ============ BOTÓN VOLVER ARRIBA ============ */
+  #top{
+    position:fixed;bottom:1.2rem;right:1.2rem;
+    width:44px;height:44px;border-radius:50%;
+    background:var(--azul);color:var(--blanco);
+    border:0;cursor:pointer;font-size:1.2rem;
+    box-shadow:0 6px 20px rgba(27,58,107,.3);
+    display:none;align-items:center;justify-content:center;
+    z-index:99;transition:transform .2s;
+  }
+  #top.show{display:flex;}
+  #top:hover{transform:translateY(-3px);}
+</style>
+</head>
+<body>
+
+<!-- ============ NAVEGACIÓN ============ -->
+<nav>
+  <div class="nav-inner">
+    <span class="brand">🛡️ Ciudadanía Digital</span>
+    <button class="nav-toggle" aria-label="Abrir menú" onclick="document.getElementById('navLinks').classList.toggle('open')">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#inicio" onclick="closeNav()">Inicio</a></li>
+      <li><a href="#informacion" onclick="closeNav()">Información Digital</a></li>
+      <li><a href="#economia" onclick="closeNav()">Economía Digital</a></li>
+      <li><a href="#derechos" onclick="closeNav()">Derechos y Seguridad</a></li>
+      <li><a href="#reflexion" onclick="closeNav()">Reflexión</a></li>
+      <li><a href="#referencias" onclick="closeNav()">Referencias</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ============ HERO / INICIO ============ -->
+<header class="hero" id="inicio">
+  <div class="hero-inner">
+    <div class="hero-badges">
+      <span class="badge">Actividad No. 2</span>
+      <span class="badge">Módulo 2</span>
+      <span class="badge">Apropiaciones digitales</span>
+    </div>
+    <h1>Apropiaciones digitales:<br>de usar la tecnología a ejercer ciudadanía</h1>
+    <p class="sub">Micrositio académico sobre información digital, economía digital, derechos y seguridad en línea.</p>
+    <div class="hero-btns">
+      <a class="btn" href="#informacion">Explorar el sitio →</a>
+      <a class="btn btn-ghost" href="#reflexion">Ir a la reflexión</a>
+    </div>
+    <p style="margin-top:2rem;color:rgba(255,255,255,.85);font-size:.92rem;">
+      <strong style="color:#fff;">David Esteban Patiño Sepulveda</strong> · Código 146832<br>
+      Ciudadanía Digital — Actividad No. 2
+    </p>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ INTRODUCCIÓN ============ -->
+<section id="intro" style="padding-top:2.5rem;">
+  <span class="section-kicker">Introducción</span>
+  <h2>¿Qué son las apropiaciones digitales?</h2>
+  <p>Este micrositio organiza los conceptos centrales de las <strong>apropiaciones digitales</strong> y muestra cómo se viven en la práctica cotidiana en contextos sociales, económicos, culturales y políticos. Continúa el trabajo del módulo 1, donde se identificaron los conceptos base de la ciudadanía digital, y lo lleva a situaciones concretas: cómo me informo, cómo me comunico, cómo compro y vendo en línea y cómo protejo mis datos.</p>
+
+  <div class="grid grid-2" style="margin-top:1.4rem;">
+    <div class="card card-destaque">
+      <h3>¿Qué son las apropiaciones digitales?</h3>
+      <p>Es el proceso mediante el cual una persona pasa de solo usar herramientas digitales a incorporarlas en su vida de forma <strong>consciente, crítica y responsable</strong>: sabe para qué las usa, evalúa lo que encuentra, respeta a los demás y se protege. <em>(Definición de trabajo)</em></p>
+    </div>
+    <div class="card card-destaque">
+      <h3>¿Por qué importa la ciudadanía digital?</h3>
+      <p>Porque cada acción en línea (publicar, comprar, compartir un dato) tiene efectos reales sobre otras personas y sobre uno mismo. Ser ciudadano digital implica <strong>conocer derechos y ejercer deberes</strong> en ese entorno.</p>
+    </div>
+  </div>
+
+  <p style="margin-top:1.4rem;"><strong>Ruta del sitio:</strong> Información digital → Economía digital → Derechos y seguridad → Reflexión personal.</p>
+</section>
+
+<!-- ============ SECCIÓN 1 — INFORMACIÓN DIGITAL ============ -->
+<section id="informacion">
+  <span class="section-kicker">Sección 1</span>
+  <h2>Información digital</h2>
+  <p><strong>Leer con criterio, comunicar con responsabilidad, tratar con respeto.</strong> Los tres conceptos forman una cadena: el <strong>alfabetismo digital</strong> me permite encontrar y evaluar información; la <strong>comunicación digital</strong> es lo que hago con esa información al enviarla o publicarla; y la <strong>Netiqueta</strong> son las normas de respeto que hacen que esa comunicación sea responsable. Si falla el primer eslabón (no verifico), el segundo transmite errores; si falla el tercero (no respeto), la comunicación daña a otros.</p>
+
+  <div class="cadena">
+    <span class="nodo">Alfabetismo digital</span>
+    <span class="flecha">→</span>
+    <span class="nodo">Comunicación responsable</span>
+    <span class="flecha">→</span>
+    <span class="nodo">Netiqueta</span>
+  </div>
+
+  <div class="grid grid-3">
+    <div class="card">
+      <span class="icon">📚</span>
+      <h3>Alfabetismo digital</h3>
+      <p><strong>Definición:</strong> capacidad de acceder, gestionar, comprender, integrar, comunicar, evaluar y crear información de forma segura y apropiada mediante tecnologías digitales (UNESCO, Law et al., 2018).</p>
+      <p><strong>Importancia:</strong> sin esta capacidad no se distingue una fuente confiable de una engañosa, ni un anuncio real de una estafa.</p>
+      <p><strong>Aplicación cotidiana:</strong> comprobar quién publica una noticia antes de compartirla; revisar perfil, antigüedad y reseñas de un vendedor; usar buscadores y bases académicas para una tarea.</p>
+      <p><strong>Relación con ciudadanía digital:</strong> un ciudadano digital decide con información evaluada, no con la primera que aparece.</p>
+    </div>
+
+    <div class="card">
+      <span class="icon">💬</span>
+      <h3>Comunicación digital</h3>
+      <p><strong>Qué es:</strong> intercambio de mensajes mediante medios digitales (mensajería, correo, redes sociales, videollamadas, foros).</p>
+      <p><strong>Cómo se usa:</strong> para estudiar en grupo, coordinar trabajos, ofrecer o consultar productos y participar en comunidades.</p>
+      <p><strong>Ventajas:</strong> inmediatez, bajo costo, alcance amplio, registro de lo dicho.</p>
+      <p><strong>Riesgos:</strong> malentendidos por falta de tono y gestos, difusión de rumores, exposición de datos y suplantación.</p>
+      <p><strong>Dato jurídico:</strong> en Colombia un mensaje de datos no pierde validez jurídica por ser digital (Ley 527 de 1999); una conversación de compraventa puede servir como evidencia.</p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🤝</span>
+      <h3>Netiqueta</h3>
+      <p><strong>Definición:</strong> conjunto de normas de cortesía y respeto para comunicarse en línea, sistematizadas por Virginia Shea (1994).</p>
+      <p><strong>Comportamiento adecuado:</strong> saludar, escribir con claridad, no usar mayúsculas sostenidas para gritar, no reenviar datos de terceros, corregir un error en privado.</p>
+      <p><strong>Consecuencias de no aplicarla:</strong> conflictos, pérdida de credibilidad, ciberacoso, exposición de la intimidad de otros y, en casos graves, responsabilidad legal.</p>
+    </div>
+  </div>
+
+  <h3>Las 8 reglas de la Netiqueta (Shea, 1994)</h3>
+  <div class="acordeon">
+    <details><summary>1. Recordar que hay una persona al otro lado</summary><div class="contenido">Detrás de cada mensaje hay una persona con emociones. Escribir con la misma consideración que se tendría cara a cara.</div></details>
+    <details><summary>2. Mantener los mismos estándares que en la vida real</summary><div class="contenido">Lo que no se diría en persona, no se escribe en línea. La pantalla no justifica la falta de respeto.</div></details>
+    <details><summary>3. Saber en qué espacio digital se está</summary><div class="contenido">Cada plataforma tiene sus normas: un chat académico no es igual a una red social informal.</div></details>
+    <details><summary>4. Respetar el tiempo y los recursos de los demás</summary><div class="contenido">No saturar con mensajes innecesarios ni reenviar cadenas; valorar el tiempo ajeno.</div></details>
+    <details><summary>5. Compartir conocimiento experto</summary><div class="contenido">Aportar lo que se sabe con generosidad y humildad; responder dudas cuando sea posible.</div></details>
+    <details><summary>6. Respetar la privacidad ajena</summary><div class="contenido">No reenviar fotos, capturas ni datos de terceros sin su permiso explícito.</div></details>
+    <details><summary>7. No abusar del poder propio</summary><div class="contenido">Quien administra un grupo o tiene más conocimiento no debe aprovecharse de esa ventaja.</div></details>
+    <details><summary>8. Perdonar los errores de los demás</summary><div class="contenido">Corregir en privado y con respeto; nadie nace sabiendo todas las normas de cada plataforma.</div></details>
+  </div>
+
+  <h3>Ejemplos contextualizados</h3>
+  <div class="ejemplo">
+    <strong>Anuncio de venta en Marketplace.</strong> Alfabetismo: reviso el perfil, las fotos y el precio para detectar señales de fraude. Comunicación: pregunto por escrito lo esencial y acuerdo entrega en persona. Netiqueta: si sospecho, dejo de responder de forma cortés y reporto, sin insultar ni publicar los datos del otro.
+  </div>
+  <div class="ejemplo">
+    <strong>Grupo de estudio en mensajería.</strong> Alfabetismo: verifico la fuente antes de reenviar un enlace. Comunicación: resumo la idea en lugar de reenviar 20 mensajes. Netiqueta: no expongo a un compañero por un error; se lo digo en privado.
+  </div>
+</section>
+
+<!-- ============ SECCIÓN 2 — ECONOMÍA DIGITAL ============ -->
+<section id="economia">
+  <span class="section-kicker">Sección 2</span>
+  <h2>Procesos económicos digitales</h2>
+  <p>La economía digital contemporánea funciona sobre plataformas que conectan personas. Dos procesos la ilustran: la <strong>economía colaborativa</strong>, donde particulares comparten el uso de bienes o servicios, y el <strong>comercio electrónico</strong>, donde se compra y vende a través de medios digitales. Ambos generan oportunidades y exigen confianza, información veraz y protección de datos, lo que conecta con la Sección 3.</p>
+
+  <div class="grid grid-2">
+    <div class="card">
+      <span class="icon">🤝</span>
+      <h3>Economía colaborativa</h3>
+      <p><strong>Definición:</strong> modelos de negocio en los que plataformas colaborativas crean un mercado abierto para el uso temporal de bienes o servicios, ofrecidos a menudo por particulares (Comisión Europea, 2016).</p>
+      <p><strong>Funcionamiento:</strong> un oferente publica un bien o servicio, un usuario lo contrata a través de la plataforma, y esta intermedia el contacto y, con frecuencia, el pago y las valoraciones.</p>
+      <p><strong>Características:</strong> participan particulares; hay uso temporal de bienes o servicios; la plataforma actúa como intermediaria; la confianza se apoya en reputación y calificaciones.</p>
+      <p><strong>Ventajas:</strong> nuevos servicios, mayor oferta y precios más bajos para consumidores, ingresos adicionales y horarios flexibles para quienes ofrecen, mejor aprovechamiento de recursos (Comisión Europea, 2016).</p>
+      <p><strong>Riesgos:</strong> límites difusos entre consumidor y proveedor y entre trabajo autónomo y dependiente; incertidumbre sobre qué normas aplican (Comisión Europea, 2016).</p>
+      <p><strong>Impacto social:</strong> abre fuentes de ingreso y reduce costos, pero tensiona sectores tradicionales y genera debates regulatorios que varían de un país a otro.</p>
+    </div>
+
+    <div class="card">
+      <span class="icon">🛒</span>
+      <h3>Comercio electrónico</h3>
+      <p><strong>Definición:</strong> toda relación de índole comercial, sea o no contractual, estructurada a partir del uso de uno o más mensajes de datos u otro medio similar (Ley 527 de 1999, art. 2).</p>
+      <p><strong>Funcionamiento:</strong> se publica la oferta, se acuerdan precio y condiciones por medios digitales, se paga en línea o contra entrega y se entrega el bien o servicio.</p>
+      <p><strong>Modalidades:</strong> B2C (empresa a consumidor), B2B (empresa a empresa) y C2C (consumidor a consumidor, como la compraventa entre particulares).</p>
+      <p><strong>Ventajas:</strong> sin límite de horario ni ubicación, comparación de precios y acceso de personas naturales al mercado.</p>
+      <p><strong>Riesgos:</strong> fraudes (productos falsos o inexistentes, anticipos), suplantación de vendedores y páginas, entrega de datos innecesarios.</p>
+      <p><strong>Seguridad:</strong> verificar al vendedor, preferir pagos rastreables o contra entrega, desconfiar de anticipos, no entregar claves ni códigos y guardar las conversaciones.</p>
+      <p><strong>Impacto económico:</strong> amplía el mercado para pequeños vendedores y cambia hábitos de consumo; su crecimiento depende de la confianza.</p>
+    </div>
+  </div>
+
+  <h3>Ejemplos contextualizados</h3>
+  <div class="ejemplo">
+    <strong>1. Alojamiento entre particulares (Airbnb).</strong> Un anfitrión ofrece una habitación por noches; el huésped reserva y paga en la plataforma. Beneficio: ingreso extra y alternativa de hospedaje. Impacto crítico: compite con la hotelería tradicional y plantea preguntas sobre regulación y responsabilidad.
+  </div>
+  <div class="ejemplo">
+    <strong>2. Transporte por plataforma (Uber).</strong> Un conductor ofrece viajes a usuarios que los solicitan desde una aplicación. Beneficio: comodidad y flexibilidad. Impacto crítico: reacciones regulatorias distintas entre países, incluidas restricciones, y dudas sobre las condiciones laborales.
+  </div>
+  <div class="ejemplo">
+    <strong>3. Compra en tienda en línea (B2C).</strong> En las ventas a distancia el Estatuto del Consumidor (Ley 1480 de 2011, art. 47) reconoce el derecho de retracto, que permite devolver el producto dentro de cinco días hábiles, con las excepciones que establece la norma (SIC, 2016). Protege al comprador cuando no pudo ver el producto antes.
+  </div>
+  <div class="ejemplo">
+    <strong>4. Compraventa entre particulares en Marketplace (C2C).</strong> Un particular vende un artículo a otro, acuerdan por chat y coordinan entrega. Lectura crítica: la protección es más limitada, porque el Estatuto del Consumidor regula relaciones entre productores o proveedores y consumidores (SIC, 2016). Por eso pesan más la prudencia personal y la evidencia del chat (Ley 527 de 1999).
+  </div>
+
+  <h3>Comparación entre los dos procesos</h3>
+  <div class="tabla-wrap">
+    <table>
+      <thead>
+        <tr><th>Aspecto</th><th>Economía colaborativa</th><th>Comercio electrónico</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Quién participa</strong></td><td>Particulares que comparten bienes o servicios de uso temporal</td><td>Empresas (B2C, B2B) o particulares (C2C)</td></tr>
+        <tr><td><strong>Funcionamiento</strong></td><td>Plataforma intermedia contacto, pago y reputación</td><td>Oferta → acuerdo → pago en línea o contra entrega → entrega</td></tr>
+        <tr><td><strong>Ejemplos</strong></td><td>Airbnb, Uber</td><td>Tienda en línea B2C, Marketplace C2C</td></tr>
+        <tr><td><strong>Riesgo principal</strong></td><td>Límites laborales y regulatorios difusos</td><td>Fraudes y suplantación de vendedores</td></tr>
+        <tr><td><strong>Impacto</strong></td><td>Ingresos adicionales y tensiones con sectores tradicionales</td><td>Mercado ampliado para pequeños vendedores</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ SECCIÓN 3 — DERECHOS Y SEGURIDAD ============ -->
+<section id="derechos">
+  <span class="section-kicker">Sección 3</span>
+  <h2>Derechos digitales y seguridad en línea</h2>
+  <p>Comprar, vender y comunicarse en línea implica compartir datos. Esta sección relaciona tres derechos con prácticas de seguridad y con los deberes que cada usuario tiene frente a los demás.</p>
+
+  <h3>Protección de datos personales</h3>
+  <p><strong>Qué son los datos personales:</strong> información vinculada o asociable a una persona determinada o determinable (nombre, documento, teléfono, dirección, fotos, cuentas). En Colombia se protegen mediante la Ley 1581 de 2012, y la Superintendencia de Industria y Comercio (SIC) vigila su cumplimiento.</p>
+  <p><strong>Por qué protegerlos:</strong> con ellos se puede suplantar a una persona, abrir cuentas o cometer fraudes.</p>
+  <p><strong>Riesgos de compartir información:</strong> enviar fotos del documento, códigos de verificación o datos bancarios a un desconocido; publicar la dirección o el teléfono en un anuncio abierto.</p>
+  <p><strong>Buenas prácticas:</strong> compartir solo lo necesario, no enviar códigos recibidos por mensaje, revisar quién solicita los datos y para qué.</p>
+
+  <h3>Tres derechos digitales con situación cotidiana</h3>
+  <div class="grid grid-3">
+    <div class="card">
+      <h4>1. Hábeas data</h4>
+      <p>El titular puede conocer, actualizar y rectificar la información que reposa sobre él en bases de datos y presentar reclamos ante la SIC (Ley 1581 de 2012).</p>
+      <p><em>Situación:</em> una plataforma de compras guarda mi número y mi dirección; puedo pedir que los corrija o elimine si ya no los necesito allí.</p>
+    </div>
+    <div class="card">
+      <h4>2. Protección al consumidor a distancia</h4>
+      <p>Incluye información veraz y el derecho de retracto en las ventas a distancia (Ley 1480 de 2011, art. 47; SIC, 2016).</p>
+      <p><em>Situación:</em> compro un producto en una tienda en línea y no corresponde a lo ofrecido; puedo ejercer el retracto dentro del plazo legal.</p>
+    </div>
+    <div class="card">
+      <h4>3. Protección frente a delitos informáticos</h4>
+      <p>La Ley 1273 de 2009 creó el bien jurídico “de la protección de la información y de los datos” y sanciona la suplantación de sitios web (art. 269G) y el hurto por medios informáticos (art. 269I).</p>
+      <p><em>Situación:</em> si recibo un enlace falso de “mi banco” que imita su página, no es solo una molestia: puede ser un delito que se denuncia.</p>
+    </div>
+  </div>
+
+  <h3>Deberes ciudadanos digitales</h3>
+  <ul>
+    <li>Respetar la privacidad de otros: no reenviar datos, capturas ni fotos de terceros sin permiso (Shea, 1994).</li>
+    <li>No suplantar identidades ni engañar en una venta (describir el producto con veracidad).</li>
+    <li>Verificar antes de compartir información.</li>
+    <li>Cumplir los términos de las plataformas que uso.</li>
+    <li>Reportar perfiles y anuncios fraudulentos.</li>
+    <li>Tratar con respeto a las demás personas en línea (Netiqueta).</li>
+  </ul>
+
+  <h3>Seguridad en línea: prácticas y situaciones</h3>
+  <div class="acordeon">
+    <details><summary>🔑 Contraseñas seguras</summary><div class="contenido">Largas, únicas por cuenta, con letras, números y símbolos; evitar datos personales. <strong>Situación:</strong> no repetir la misma clave del correo en Marketplace.</div></details>
+    <details><summary>🔐 Autenticación en dos pasos</summary><div class="contenido">Activarla en correo, redes y banca. <strong>Situación:</strong> si roban mi clave, aún necesitan el segundo código.</div></details>
+    <details><summary>🔗 Enlaces sospechosos (phishing)</summary><div class="contenido">No abrir enlaces de remitentes desconocidos; escribir la dirección oficial a mano. <strong>Situación:</strong> mensaje “tu cuenta será cerrada, ingresa aquí”.</div></details>
+    <details><summary>🛡️ Protección de datos personales</summary><div class="contenido">Compartir lo mínimo; no enviar códigos ni fotos de documentos. <strong>Situación:</strong> comprador que pide “verificar tu identidad” con una foto de tu cédula.</div></details>
+    <details><summary>📱 Actualización de dispositivos</summary><div class="contenido">Mantener sistema y aplicaciones al día. <strong>Situación:</strong> instalar la actualización de seguridad del celular.</div></details>
+    <details><summary>⚠️ Prevención del fraude</summary><div class="contenido">No adelantar dinero a desconocidos; preferir pago contra entrega o verificable. <strong>Situación:</strong> vendedor que exige un anticipo por un producto que “solo queda uno”.</div></details>
+    <details><summary>📡 Redes Wi-Fi públicas</summary><div class="contenido">Evitar banca o compras en redes abiertas; usar datos móviles o VPN. <strong>Situación:</strong> no ingresar a la banca desde el Wi-Fi de una cafetería.</div></details>
+    <details><summary>🌐 Uso responsable de redes sociales</summary><div class="contenido">Configurar privacidad, no publicar ubicación en tiempo real. <strong>Situación:</strong> publicar un artículo en venta sin mostrar la dirección de casa.</div></details>
+  </div>
+
+  <h3>Semáforo de riesgo antes de comprar o compartir</h3>
+  <div class="semaforo">
+    <div class="luz verde">✔️ <strong>Verde:</strong> vendedor con reseñas, pago contra entrega, conversación guardada</div>
+    <div class="luz amarillo">⚠️ <strong>Amarillo:</strong> precio muy bajo, perfil recién creado, presión por decidir rápido</div>
+    <div class="luz rojo">⛔ <strong>Rojo:</strong> pide anticipo a desconocido, códigos de verificación o foto del documento</div>
+  </div>
+</section>
+
+<!-- ============ REFLEXIÓN ============ -->
+<section id="reflexion">
+  <span class="section-kicker">Sección final</span>
+  <h2>Reflexión personal</h2>
+  <div class="reflexion">
+    <p>Comprar y vender por Marketplace es una de las formas en que más participo en la economía digital. Antes lo veía como algo simple: publicar, chatear y cerrar el trato. Este módulo me hizo notar que en cada paso hay decisiones de ciudadanía digital: qué información creo, cómo escribo, a quién le doy mis datos y cuánto confío.</p>
+
+    <p>Un caso concreto me lo dejó claro. Recibí un intento de estafa con productos falsos o inexistentes, en el que me pedían un anticipo. Lo que me protegió fue algo que ahora sé nombrar como alfabetismo digital: desconfiar de un pago por adelantado a un desconocido y revisar la oferta antes de actuar. También entendí por qué es una práctica riesgosa: el Estatuto del Consumidor protege sobre todo a quien compra a un proveedor, y en una venta entre particulares tengo menos respaldo, así que la prudencia personal pesa más. Además, aprendí que la conversación es evidencia, por lo que conviene guardarla y no borrarla.</p>
+
+    <p>En la comunicación, procuro que mis mensajes sean claros y respetuosos, incluso cuando sospecho de la otra persona. Ahora entiendo que la Netiqueta no es cortesía decorativa: responder con respeto y no exponer los datos de otro también es una forma de proteger, porque una discusión pública puede terminar en ciberacoso o en exposición de información privada.</p>
+
+    <p>Para proteger mis datos uso contraseñas alfanuméricas. Reconozco que es un buen comienzo, pero insuficiente: debo hacerlas más largas, no repetirlas entre cuentas y activar la autenticación en dos pasos. Los riesgos que más debo reconocer son el fraude con anticipos, el phishing por enlaces falsos y la entrega de datos innecesarios, como códigos de verificación o fotos de documentos.</p>
+
+    <p>En mi entorno social y cultural, comprar y vender por internet ya es una práctica normal, y eso es positivo porque abre oportunidades de ingreso y acceso a productos. Pero también normaliza la confianza en desconocidos, y el costo lo pagan quienes no tienen estas herramientas. Por eso creo que difundir estas prácticas entre familiares y compañeros es parte de ser ciudadano digital.</p>
+
+    <p><strong>Lo que puedo mejorar:</strong> reforzar mis contraseñas y la autenticación en dos pasos, denunciar y reportar los intentos de fraude en lugar de solo ignorarlos, verificar siempre la fuente antes de compartir y compartir lo que aprendo para que otros no caigan en las mismas trampas.</p>
+  </div>
+</section>
+
+<!-- ============ REFERENCIAS ============ -->
+<section id="referencias">
+  <span class="section-kicker">Fuentes</span>
+  <h2>Referencias (APA 7.ª edición)</h2>
+  <ul class="referencias">
+    <li>Comisión Europea. (2016, 2 de junio). <em>Una agenda europea para la economía colaborativa</em> (COM(2016) 356 final). <a href="https://www.uma.es/departamento-de-derecho-civil-derecho-eclesiastico-del-estado-y-derecho-romano/navegador_de_ficheros/Proyecto-FEDER-Alojamientos-Turisticos/descargar/DOCUMENTACION/AGENDA-EUROPEA-ECONOMIA-COLABORATIVA.PDF" target="_blank" rel="noopener">https://www.uma.es/…/AGENDA-EUROPEA-ECONOMIA-COLABORATIVA.PDF</a></li>
+    <li>Congreso de la República de Colombia. (1999, 18 de agosto). <em>Ley 527 de 1999: Por medio de la cual se define y reglamenta el acceso y uso de los mensajes de datos, del comercio electrónico y de las firmas digitales…</em> Diario Oficial No. 43.673. <a href="https://relatoria.colombiacompra.gov.co/normativa/ley-527-de-1999/" target="_blank" rel="noopener">https://relatoria.colombiacompra.gov.co/normativa/ley-527-de-1999/</a></li>
+    <li>Congreso de la República de Colombia. (2009, 5 de enero). <em>Ley 1273 de 2009: Por medio de la cual se modifica el Código Penal, se crea un nuevo bien jurídico tutelado —denominado “de la protección de la información y de los datos”…</em> Diario Oficial No. 47.223. <a href="https://www.cancilleria.gov.co/sites/default/files/Normograma/docs/pdf/ley_1273_2009.pdf" target="_blank" rel="noopener">https://www.cancilleria.gov.co/…/ley_1273_2009.pdf</a></li>
+    <li>Congreso de la República de Colombia. (2012, 17 de octubre). <em>Ley Estatutaria 1581 de 2012: Por la cual se dictan disposiciones generales para la protección de datos personales</em>. Función Pública, Gestor Normativo. <a href="https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=49981" target="_blank" rel="noopener">https://www.funcionpublica.gov.co/…?i=49981</a></li>
+    <li>Law, N., Woo, D., de la Torre, J., &amp; Wong, G. (2018). <em>A global framework of reference on digital literacy skills for indicator 4.4.2</em> (Information Paper No. 51). UNESCO Institute for Statistics. <a href="https://uis.unesco.org/sites/default/files/documents/ip51-global-framework-reference-digital-literacy-skills-2018-en.pdf" target="_blank" rel="noopener">https://uis.unesco.org/…/ip51-global-framework-reference-digital-literacy-skills-2018-en.pdf</a></li>
+    <li>Shea, V. (1994). <em>Netiquette</em>. Albion Books.</li>
+    <li>Superintendencia de Industria y Comercio. (2016). <em>Concepto radicado 16-062808-00001-0000 [Alcance del derecho de retracto, artículo 47 de la Ley 1480 de 2011]</em>. <a href="https://cdn.actualicese.com/normatividad/2016/Conceptos/C16062808-16.pdf" target="_blank" rel="noopener">https://cdn.actualicese.com/…/C16062808-16.pdf</a></li>
+  </ul>
+</section>
+
+<!-- ============ ENLACE AL MICROSITIO ============ -->
+<section id="enlace">
+  <span class="section-kicker">Entrega</span>
+  <h2>Enlace público al micrositio</h2>
+  <div class="enlace-destacado">
+    <p style="color:rgba(255,255,255,.85);margin-bottom:.4rem;">Este es el enlace que debe copiarse en el PDF de entrega:</p>
+    <p><a href="[PEGAR AQUÍ EL ENLACE PÚBLICO DEL MICROSITIO]" target="_blank" rel="noopener">[PEGAR AQUÍ EL ENLACE PÚBLICO DEL MICROSITIO]</a></p>
+  </div>
+  <p style="font-size:.9rem;"><em>Recuerda verificar el enlace en una ventana de incógnito antes de enviarlo.</em></p>
+</section>
+
+</main>
+
+<footer>
+  <p><strong>David Esteban Patiño Sepulveda</strong> · Código 146832</p>
+  <p>Ciudadanía Digital — Actividad No. 2 · Módulo 2</p>
+  <p style="margin-top:.6rem;font-size:.82rem;">Micrositio académico elaborado con fines educativos. Contenido basado en la guía de la actividad y fuentes verificadas citadas en la sección de Referencias.</p>
+</footer>
+
+<button id="top" aria-label="Volver arriba" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+  // Cerrar menú al hacer clic en un enlace (móvil)
+  function closeNav(){
+    document.getElementById('navLinks').classList.remove('open');
+  }
+
+  // Botón "volver arriba"
+  const topBtn = document.getElementById('top');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 400) topBtn.classList.add('show');
+    else topBtn.classList.remove('show');
+  });
+
+  // Cerrar menú al hacer clic fuera
+  document.addEventListener('click', (e) => {
+    const nav = document.getElementById('navLinks');
+    const toggle = document.querySelector('.nav-toggle');
+    if (!nav.contains(e.target) && !toggle.contains(e.target)) {
+      nav.classList.remove('open');
+    }
+  });
+</script>
+</body>
+</html>
